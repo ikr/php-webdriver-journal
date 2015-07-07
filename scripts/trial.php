@@ -11,10 +11,20 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $driver = RemoteWebDriver::create('127.0.0.1:4444/wd/hub', DesiredCapabilities::phantomjs());
 $driver->manage()->window()->setSize(new WebDriverDimension(1024, 1024));
-$driver->manage()->timeouts()->implicitlyWait(16);
+$driver->manage()->timeouts()->implicitlyWait(8);
 
 $driver->get('http://www.sbb.ch/geschaeftsreisen.html');
-$driver->takeScreenshot(__DIR__ . '/s1.png');
-
 $driver->findElement(WebDriverBy::id('btUser'))->sendKeys('stc-cpedersoli');
-$driver->takeScreenshot(__DIR__ . '/s2.png');
+
+$driver->executeScript('console.log(1611);');
+
+echo json_encode(
+    array_map(
+        function ($logEntry)
+        {
+            return json_decode($logEntry['message'], true);
+        },
+
+        $driver->manage()->getLog('har')
+    )
+);
