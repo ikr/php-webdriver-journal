@@ -1,7 +1,7 @@
 <?php
 
 set_error_handler(
-    function ($errno, $errstr, $errfile, $errline )
+    function ($errno, $errstr, $errfile, $errline)
     {
         throw new ErrorException($errstr, $errno, 0, $errfile, $errline);
     }
@@ -15,16 +15,3 @@ $driver->manage()->timeouts()->implicitlyWait(8);
 
 $driver->get('http://www.sbb.ch/geschaeftsreisen.html');
 $driver->findElement(WebDriverBy::id('btUser'))->sendKeys('stc-cpedersoli');
-
-$driver->executeScript('console.log(1611);');
-
-echo json_encode(
-    array_map(
-        function ($logEntry)
-        {
-            return json_decode($logEntry['message'], true);
-        },
-
-        $driver->manage()->getLog('har')
-    )
-);
