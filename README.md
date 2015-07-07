@@ -13,3 +13,7 @@ We have an automatic headless screen-scraping tool implemented with
 by itself wasn't enough). Sometimes it screws up: ticket order fails, wrong kind of tickets gets
 selected, or a child name gets confused with an adult name. This tool is summoned to ease the
 debugging of such failures.
+
+# Status
+
+**Work in progress**
