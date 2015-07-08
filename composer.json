@@ -1,6 +1,6 @@
 {
     "name": "ikr/php-webdriver-journal",
-    "description": "A journaling proxy to the Facebook's WebDriver",
+    "description": "A journaling proxy object over the Facebook's WebDriver",
     "require": {
         "facebook/webdriver": "0.6.0"
     },
