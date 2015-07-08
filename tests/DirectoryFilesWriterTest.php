@@ -14,6 +14,22 @@ class DirectoryFilesWriterTest extends PHPUnit_Framework_TestCase
         rmdir(self::parentDirPath());
     }
 
+    /**
+     * @expectedException ErrorException
+     */
+    public function testConstructorExplodesOnANastyOwnDirName()
+    {
+        new DirectoryFilesWriter(self::parentDirPath(), '/../../../../root');
+    }
+
+    /**
+     * @expectedException ErrorException
+     */
+    public function testConstructorExplodesOnTheDotDotOwnDirName()
+    {
+        new DirectoryFilesWriter(self::parentDirPath(), '..');
+    }
+
     public function testWrite()
     {
         $w = new DirectoryFilesWriter(self::parentDirPath(), 'testWrite');
@@ -23,12 +39,12 @@ class DirectoryFilesWriterTest extends PHPUnit_Framework_TestCase
             '# Intro',
 
             file_get_contents(
-                self::parentDirPath() . '/DirectoryFilesWriterTest/testWrite/README.md'
+                self::parentDirPath() . '/testWrite/README.md'
             )
         );
 
-        unlink(self::parentDirPath() . '/DirectoryFilesWriterTest/testWrite/README.md');
-        rmdir(self::parentDirPath() . '/DirectoryFilesWriterTest/testWrite');
+        unlink(self::parentDirPath() . '/testWrite/README.md');
+        rmdir(self::parentDirPath() . '/testWrite');
     }
 
     private static function parentDirPath()
