@@ -6,15 +6,22 @@ class DirectoryFilesWriter
 {
     public function __construct($parentDirPath, $ownDirName)
     {
-        self::assertNoFileSystemTricks($ownDirName);
+        self::assertFsName($ownDirName);
         $this->dirPath = $parentDirPath . '/' . $ownDirName;
     }
 
-    public function write($fileName, $fileContents)
+    public function save($fileName, $fileContents)
     {
-        self::assertNoFileSystemTricks($fileName);
+        self::assertFsName($fileName);
         $this->ensureDirPresence();
         file_put_contents($this->dirPath . '/' . $fileName, $fileContents);
+    }
+
+    public function log($fileName, $message)
+    {
+        self::assertFsName($fileName);
+        $this->ensureDirPresence();
+        file_put_contents($this->dirPath . '/' . $fileName, $message . "\n", FILE_APPEND);
     }
 
     private function ensureDirPresence()
@@ -24,9 +31,9 @@ class DirectoryFilesWriter
         }
     }
 
-    private static function assertNoFileSystemTricks($name)
+    private static function assertFsName($name)
     {
-        assert(preg_match('/\//', $name) === 0, 'No slashes in file system names');
-        assert(preg_match('/^\.\./', $name) === 0, 'No leading ".."');
+        assert(preg_match('/\//', $name) === 0, 'No slashes in file system name');
+        assert(preg_match('/^\.\./', $name) === 0, 'No leading ".." in file system name');
     }
 }
