@@ -33,7 +33,12 @@ class DirectoryFilesWriter
 
     private static function assertFsName($name)
     {
-        assert(preg_match('/\//', $name) === 0, 'No slashes in file system name');
-        assert(preg_match('/^\.\./', $name) === 0, 'No leading ".." in file system name');
+        if (preg_match('/\//', $name) !== 0) {
+            throw new \RuntimeException('No slashes in file system name');
+        }
+
+        if (preg_match('/^\.\./', $name) !== 0) {
+            throw new \RuntimeException('No leading ".." in file system name');
+        }
     }
 }

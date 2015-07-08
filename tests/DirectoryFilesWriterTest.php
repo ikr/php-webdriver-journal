@@ -15,7 +15,7 @@ class DirectoryFilesWriterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException ErrorException
+     * @expectedException RuntimeException
      */
     public function testConstructorExplodesOnANastyOwnDirName()
     {
@@ -23,7 +23,7 @@ class DirectoryFilesWriterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException ErrorException
+     * @expectedException RuntimeException
      */
     public function testConstructorExplodesOnTheDotDotOwnDirName()
     {
