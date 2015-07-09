@@ -13,6 +13,44 @@ by itself wasn't enough). Sometimes it screws up: ticket order fails, wrong kind
 selected, or a child name gets confused with an adult name. This tool is summoned to ease the
 debugging of such failures.
 
-# Status
+# Installation
 
-**Work in progress**
+```
+$ composer require ikr/php-webdriver-journal
+```
+
+# API
+
+```php
+$driver = \RemoteWebDriver::create(
+    $seleniumHubUrl,
+    \DesiredCapabilities::phantomjs()
+);
+
+$wrappedDriver = new \WebDriverJournal\WebDriverProxy(
+    $driver,
+
+    new \WebDriverJournal\Probe(
+        $driver,
+
+        new \WebDriverJournal\Journal(
+            new \WebDriverJournal\DirectoryFilesWriter(
+                '/tmp/web-driver-journals',
+                $browserSessionIdOfYourChoice
+            )
+        )
+    )
+);
+
+$wrappedDriver->manage()->window()->setSize(new \WebDriverDimension(1024, 1024));
+$wrappedDriver->manage()->timeouts()->implicitlyWait(8);
+
+$wrappedDriver->get('https://ikr.su/');
+$wrappedDriver->findElement(\WebDriverBy::id('btn-next'))->click();
+// ...
+$wrappedDriver->quit();
+```
+
+# Maturity
+
+Still experimental: v0.1.x
