@@ -22,7 +22,7 @@ class DirectoryFilesWriter
         self::assertFsName($fileName);
         $this->ensureDirPresence();
         file_put_contents($this->filePath($fileName), $message . "\n", FILE_APPEND);
-        chmod($this->filePath($fileName), 0644);
+        chmod($this->filePath($fileName), 0664);
     }
 
     private function filePath($fileName)
