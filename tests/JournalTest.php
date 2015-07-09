@@ -27,19 +27,19 @@ class JournalTest extends PHPUnit_Framework_TestCase
         $j->screenshot('');
     }
 
-    public function testScreenshotLogsToLogMd()
+    public function testScreenshotLogsToIndexHtml()
     {
         $w = self::writer();
-        $w->shouldReceive('log')->once()->with('log.md', m::any());
+        $w->shouldReceive('log')->once()->with('index.html', m::any());
 
         $j = new WebDriverJournal\Journal($w);
         $j->screenshot('');
     }
 
-    public function testScreenshotLogsTheMarkdownImageItem()
+    public function testScreenshotLogsTheHtmlImageItem()
     {
         $w = self::writer();
-        $w->shouldReceive('log')->once()->with(m::any(), '/!\[.*\]\(.*\.png/');
+        $w->shouldReceive('log')->once()->with(m::any(), '/<img src=".*\.png/');
 
         $j = new WebDriverJournal\Journal($w);
         $j->screenshot('');

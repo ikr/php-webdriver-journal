@@ -13,6 +13,6 @@ class Journal
     {
         $name = uniqid() . '.png';
         $this->directoryFilesWriter->save($name, $pngBuffer);
-        $this->directoryFilesWriter->log('log.md', "![]($name)");
+        $this->directoryFilesWriter->log('index.html', '<img src="' . $name . '">');
     }
 }
