@@ -15,11 +15,21 @@ class Probe
     {
         $pngBuffer = $this->webDriver->takeScreenshot();
 
-        if ($pngBuffer === $this->pngBuffer) {
+        if (self::screenshotIsTooSmall($pngBuffer) || $this->screenshotHasNotChanged($pngBuffer)) {
             return;
         }
 
         $this->journal->screenshot($pngBuffer);
         $this->pngBuffer = $pngBuffer;
+    }
+
+    private function screenshotHasNotChanged($pngBuffer)
+    {
+        return ($pngBuffer === $this->pngBuffer);
+    }
+
+    private static function screenshotIsTooSmall($pngBuffer)
+    {
+        return (strlen($pngBuffer) < 5000);
     }
 }
