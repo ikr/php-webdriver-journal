@@ -14,14 +14,19 @@ class DirectoryFilesWriter
     {
         self::assertFsName($fileName);
         $this->ensureDirPresence();
-        file_put_contents($this->dirPath . '/' . $fileName, $fileContents);
+        file_put_contents($this->filePath($fileName), $fileContents);
     }
 
     public function log($fileName, $message)
     {
         self::assertFsName($fileName);
         $this->ensureDirPresence();
-        file_put_contents($this->dirPath . '/' . $fileName, $message . "\n", FILE_APPEND);
+        file_put_contents($this->filePath($fileName), $message . "\n", FILE_APPEND);
+    }
+
+    private function filePath($fileName)
+    {
+        return $this->dirPath . '/' . $fileName;
     }
 
     private function ensureDirPresence()
