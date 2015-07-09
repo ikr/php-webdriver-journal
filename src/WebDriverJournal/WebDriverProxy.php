@@ -14,7 +14,10 @@ class WebDriverProxy
     {
         $this->probe->run();
         $result = call_user_func_array([$this->webDriver, $methodName], $arguments);
-        $this->probe->run();
+
+        if ($methodName !== 'quit') {
+            $this->probe->run();
+        }
 
         return $result;
     }

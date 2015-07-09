@@ -40,4 +40,16 @@ class WebDriverProxyTest extends PHPUnit_Framework_TestCase
             ['manage']
         ];
     }
+
+    public function testMakesOnlyOneProbeOnQuit()
+    {
+        $driver = m::mock('driver');
+        $driver->shouldReceive('quit');
+
+        $probe = m::mock('probe');
+        $probe->shouldReceive('run')->once();
+
+        $proxy = new WebDriverJournal\WebDriverProxy($driver, $probe);
+        $result = $proxy->quit();
+    }
 }
