@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ikr/php-webdriver-journal.svg)](https://travis-ci.org/ikr/php-webdriver-journal)
+[![Build Status](https://travis-ci.org/ikr/php-webdriver-journal.svg?branch=master)](https://travis-ci.org/ikr/php-webdriver-journal)
 
 # Summary
 
