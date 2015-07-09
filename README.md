@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ikr/php-webdriver-journal.svg)](https://travis-ci.org/ikr/php-webdriver-journal)
+
 # Summary
 
 A journaling proxy to the Facebook's [WebDriver](https://github.com/facebook/php-webdriver). Wraps a
